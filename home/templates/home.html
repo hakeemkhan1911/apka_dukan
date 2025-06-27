@@ -1,0 +1,155 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block both %}
+{% if not request.user.is_authenticated %}
+    
+    <div class="content">
+        <h1>ہمارے بارے میں</h1>
+        <p>
+            <strong>Apka_Dukan.com</strong><br>
+            پر خوش آمدید! یہ ایک جدید، قابل اعتماد اور منفرد آن لائن پلیٹ فارم ہے جہاں <b>درزی، دکاندار، اور ہنر مند کاریگر</b> ایک ساتھ مل کر کام کر سکتے ہیں۔
+            ہمارا مقصد کاروباری دنیا میں آپ کا ہم سفر بننا ہے تاکہ آپ کے کام کو آسان، منظم، اور منافع بخش بنایا جا سکے۔<br><br>
+            یہاں آپ نہ صرف اپنی دکان قائم کر سکتے ہیں بلکہ کسٹمرز کے ناپ محفوظ کرنے، آرڈرز منظم کرنے، اور ضروری سامان کی خرید و فروخت کے ذریعے مکمل کاروباری نظام تشکیل دے سکتے ہیں۔
+        </p>
+
+        <h2>ہماری خدمات</h2>
+        <ul>
+            <li>✔ <strong>دکاندار اکاؤنٹ</strong> – اپنی دکان آسانی سے رجسٹر کریں اور منظم کریں۔</li>
+            <li>✔ <strong>کاریگر اکاؤنٹ</strong> – ہنر مند کاریگر کام کے مواقع تلاش کر سکتے ہیں۔</li>
+            <li>✔ <strong>کسٹمر مینجمنٹ</strong> – ناپ محفوظ کریں اور آسانی سے رسائی حاصل کریں۔</li>
+            <li>✔ <strong>خرید و فروخت</strong> – سلائی مشینیں، کپڑے اور دیگر اشیاء خریدیں اور بیچیں۔</li>
+            <li>✔ <strong>آرڈر پرنٹنگ اور شیئرنگ</strong> – رسید بنائیں اور واٹس ایپ پر شیئر کریں۔</li>
+            <li>✔ <strong>ورک شیڈولنگ</strong> – آرڈرز کی واپسی کی تاریخ یاد رکھیں اور وقت پر مکمل کریں۔</li>
+            <li>✔ <strong>رپورٹس اور کھاتہ داری</strong> – پرانے حساب کتاب اور بقایا جات کی تفصیل دیکھیں۔</li>
+            <li>✔ <strong>مقام کے حساب سے خدمات</strong> – صارفین نزدیکی درزیوں کو تلاش کر سکتے ہیں۔</li>
+            <li>✔ <strong>آن لائن بکنگ</strong> – کسٹمر آن لائن وقت لے سکتے ہیں، ناپ دے سکتے ہیں۔</li>
+        </ul>
+
+        <h2>ہمارا مقصد</h2>
+        <p>
+            <strong>Apka_Dukan.com</strong> کا مقصد درزی برادری کو جدید ٹیکنالوجی کے ذریعے بااختیار بنانا ہے تاکہ وہ اپنے کاروبار کو آسانی سے چلا سکیں، کسٹمر سروس بہتر بنا سکیں، اور اپنی آمدنی میں اضافہ کر سکیں۔
+        </p>
+
+        <h2>ہم سے رابطہ کریں</h2>
+        <p>
+            اگر آپ کے ذہن میں کوئی سوال ہے یا آپ ہم سے تعاون کرنا چاہتے ہیں تو براہ کرم ہم سے رابطہ کریں۔ ہم ہر وقت آپ کی خدمت میں حاضر ہیں۔
+        </p>
+        <a href='{% url "home:contact_us" %}'>رابتہ کریے</a>
+    </div>
+    
+    
+    
+{% else %}
+{% if not is_verified %}
+    <a href="{% url 'payments:start_payment' %}">ایک چائے کا تحفہ دیں</a>
+{% endif %}
+{% endif %}
+<form method="POST">
+    {% csrf_token %}
+    <div class="input-group">
+        <input type="text" id="text" name="text" placeholder="Name,Address or Owner" required>
+    </div>
+</form>
+
+  <!-- Right-side transparent A–Z bar -->
+  <div class="alphabet-bar">
+
+    <a class="alphabet" href="#a">A</a>
+    <a class="alphabet" href="#b">B</a>
+    <a class="alphabet" href="#c">C</a>
+    <a class="alphabet" href="#d">D</a>
+    <a class="alphabet" href="#e">E</a>
+    <a class="alphabet" href="#f">F</a>
+    <a class="alphabet" href="#g">G</a>
+    <a class="alphabet" href="#h">H</a>
+    <a class="alphabet" href="#i">I</a>
+    <a class="alphabet" href="#j">J</a>
+    <a class="alphabet" href="#k">K</a>
+    <a class="alphabet" href="#l">L</a>
+    <a class="alphabet" href="#m">M</a>
+    <a class="alphabet" href="#n">N</a>
+    <a class="alphabet" href="#o">O</a>
+    <a class="alphabet" href="#p">P</a>
+    <a class="alphabet" href="#q">Q</a>
+    <a class="alphabet" href="#r">R</a>
+    <a class="alphabet" href="#s">S</a>
+    <a class="alphabet" href="#t">T</a>
+    <a class="alphabet" href="#u">U</a>
+    <a class="alphabet" href="#v">V</a>
+    <a class="alphabet" href="#w">W</a>
+    <a class="alphabet" href="#x">X</a>
+    <a class="alphabet" href="#y">Y</a>
+    <a class="alphabet" href="#z">Z</a>  
+</div>
+
+
+<h2 style="color:white">All Shops</h2>
+{% for image in images %}
+    <h3>{{ image.name }}</h3>
+    <img src="{{ image.image.url }}" alt="{{ image.name }}" style="width:200px; height:auto;">
+{% endfor %}
+ 
+<div class="card-list">
+{% for shop,rating in rating_list %}
+    
+    {% if shop.shop_owner.fake_id == request.user.id %}
+        <a href="{% url 'shops:add_shop' %}">
+            <div style="background-color:rgb(123,241,222); position: relative;" class="card_2" id={{shop.shop_name.0}}>
+                
+                <!-- Booking Badge -->
+                <div class="top-right" style="top: 10px;color:black">
+                    {% if shop.booking %}
+                        <span class="booking-status" style="background-color:green">Open</span>
+                    {% else %}
+                        <span class="booking-status" style="background-color:red">Closed</span>
+                    {% endif %}
+                </div>
+                
+                        <img class="icon-btn" src='{{shop.image.url}}'>
+                <div class="info">
+                    <h3>{{shop|title}}</h3><br>
+                    <h4>
+                        <span>Address : {{shop.shop_address}}</span><br>
+                        <span style="color:red">Price = {{shop.price}}</span>
+                    </h4>
+                </div>
+                    <h5 style="margin-top:15px;background-color:black" class="top-right">⭐ {{rating}}</h5>
+                
+                    
+            </div>
+            
+        </a>
+    
+    {% else %}
+        <a href="{% url 'shops:shop_details' shop.id %}">
+            <div id={{shop.shop_name.0}} class="card_2" style="position: relative;">
+                
+                <!-- Booking Badge -->
+                <div style="top: 10px;color:black" class="top-right">
+                    {% if shop.booking %}
+                        <span class="booking-status" style="background-color:green">Open</span>
+                    {% else %}
+                        <span class="booking-status" style="background-color: red;">Closed</span>
+                    {% endif %}
+                </div>
+                
+                        <img class="icon-btn" src='{{shop.image.url}}'>
+                    
+                <div class="info">
+                    <h3>{{shop|title}}</h3><br>
+                    <h4>
+                        <span>Address : {{shop.shop_address}}</span><br>
+                        <span style="color:red">Price = {{shop.price}}</span>
+                    </h4>
+                </div>
+                    <h5 style="margin-top:15px;background-color:black" class="top-right">⭐ {{rating}}</h5>
+                
+            </div>
+            
+        </a>
+    {% endif %}
+{% endfor %}
+</div>
+{% endblock both %}
+         

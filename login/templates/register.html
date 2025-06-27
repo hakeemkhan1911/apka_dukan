@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block both %}
+<h2 style="color:white">آپ کس طرح رجسٹر کرنا چاہیں گے؟</h2>
+<form method="POST" class="flx">
+    {% csrf_token %}
+    <input class="neon-btn" name='button' type="submit" value="دکان دار">
+    <input class="neon-btn" name="button" type="submit" value="کاریگر">
+</form>
+<a href="{% url 'login:password_reset' %}"><span style="color:yellow">پاس ورڈ بھول گئے۔</span></a>
+
+{% endblock both %}

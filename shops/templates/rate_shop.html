@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+{% block title %}Rate shop{% endblock title %}
+
+{% block both %}
+
+
+<h2>Leave a Review for {{ shop.name }}</h2>  
+<form class="flx" method="POST">  
+    {% csrf_token %}  
+    <div class="star-rating">  
+        <input type="radio" name="rating" value="5" id="star5">  
+        <label for="star5">⭐</label> 
+        <input type="radio" name="rating" value="4" id="star4">  
+        <label for="star4">⭐</label>  
+        <input type="radio" name="rating" value="3" id="star3">  
+        <label for="star3">⭐</label>  
+        <input type="radio" name="rating" value="2" id="star2">  
+        <label for="star2">⭐</label>  
+        <input type="radio" name="rating" value="1" id="star1">  
+        <label for="star1">⭐</label>  
+    </div> 
+    <br>  
+    <div>  
+        <h5>Comment:</h5>
+        <textarea  name="comment" id="comment" required></textarea>  
+    </div>  
+    <br>  
+    <button class="submit-btn" type="submit">Submit Review</button>  
+</form>  
+{% endblock both %}  

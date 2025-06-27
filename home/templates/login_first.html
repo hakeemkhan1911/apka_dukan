@@ -1,0 +1,8 @@
+{% extends 'main.html' %}
+{% block title %}Unauth user{% endblock title %}
+{% block un_auth %}
+<h2>براہ کرم پہلے لاگ ان یا رجسٹر کریں۔</h2>
+<h2><a href="{% url 'login:which_user' %}">لاگ ان</a></h2>
+<h2><a href="{% url 'login:register' %}">رجسٹر</a></h2>
+{% endblock un_auth %}
+    

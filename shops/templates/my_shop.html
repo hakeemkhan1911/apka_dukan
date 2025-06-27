@@ -1,0 +1,164 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}Your shop{% endblock title %}
+
+
+
+{% block content %}
+{% if not is_verified %}
+    {% if customers|length >= 5  and customers|length < 50 %}
+        <a href="{% url 'payments:start_payment' %}">☕ ایک کافی تو بنتی ہے</a>
+    {% elif customers|length >= 50 and customers|length < 100 %}
+        <a href="{% url 'payments:start_payment' %}">🎁 اب تو کچھ خدمت ہو جائے!</a>
+    {% elif customers|length >= 100 and customers|length <= 150  %}
+        <a href="{% url 'payments:start_payment' %}">ہمیں آپ کی مدد کی ضرورت ہے</a>
+    
+    {% elif customers|length >= 20 %}
+    <h1>اپ گریڈ درکار ہے</h1>
+    <h3>آپ مفت ورژن کی حد تک پہنچ چکے ہیں۔ مکمل رسائی جاری رکھنے کے لیے، براہ کرم ہمارے ادا شدہ پلان میں اپ گریڈ کریں۔ آپ کی معاونت ہمارے لیے بہت اہم ہے</h3>
+        <a class="submit-btn" href="{% url 'payments:start_payment' %}">ابھی ادائیگی کریں</a>
+    {% endif %}
+
+{% if customers|length <= 20 %}
+  <!-- Right-side transparent A–Z bar -->
+  <div class="alphabet-bar">
+    <a class="alphabet" href="#a">A</a>
+    <a class="alphabet" href="#b">B</a>
+    <a class="alphabet" href="#c">C</a>
+    <a class="alphabet" href="#d">D</a>
+    <a class="alphabet" href="#e">E</a>
+    <a class="alphabet" href="#f">F</a>
+    <a class="alphabet" href="#g">G</a>
+    <a class="alphabet" href="#h">H</a>
+    <a class="alphabet" href="#i">I</a>
+    <a class="alphabet" href="#j">J</a>
+    <a class="alphabet" href="#k">K</a>
+    <a class="alphabet" href="#l">L</a>
+    <a class="alphabet" href="#m">M</a>
+    <a class="alphabet" href="#n">N</a>
+    <a class="alphabet" href="#o">O</a>
+    <a class="alphabet" href="#p">P</a>
+    <a class="alphabet" href="#q">Q</a>
+    <a class="alphabet" href="#r">R</a>
+    <a class="alphabet" href="#s">S</a>
+    <a class="alphabet" href="#t">T</a>
+    <a class="alphabet" href="#u">U</a>
+    <a class="alphabet" href="#v">V</a>
+    <a class="alphabet" href="#w">W</a>
+    <a class="alphabet" href="#x">X</a>
+    <a class="alphabet" href="#y">Y</a>
+    <a class="alphabet" href="#z">Z</a>  
+</div>
+
+
+
+<a href="{% url 'shoping:full_image' %">
+    
+</a>
+
+<div style="text-align: center;">
+  <a href="{% url 'shoping:full_image' my_shop.image.url 'True' my_shop.id 'shop' %}">
+     <img class="profile_photo" src= {{my_shop.image.url}}>
+  </a>
+</div>
+
+<section class="additional-info card">
+    
+<div class="menu-container">
+    <button style="margin-left:95%"class="dots-button" onclick="toggleMenu(this)">⋮</button>
+    <div class="dropdown-menu">
+        <a href="{% url 'shops:update_shop' my_shop.id %}">اپڈیٹ</a>
+        <a href="{% url 'shops:delete_shop' my_shop.id %}"><span style="color:red">ڈیلیٹ</span></a>
+        <a href="{% url 'shops:my_karigar' my_shop.id %}">کاریگر</a>
+        <a href="{% url 'shops:booking' my_shop.id %}">بوکنگ</a>
+        <a href="{% url 'shops:google_map' my_shop.id %}">لوکیشن</a>
+    </div>
+</div>
+        <h3>Shop Information...</h3>
+        
+        <div class='measurement-grid'>
+            <p><strong>نام</strong> <br> {{my_shop.shop_name}}</p>
+            <p><strong>ریٹ</strong> <br> {{my_shop.price}}</p>
+            <p><strong>پتہ</strong> <br> {{my_shop.shop_address}}</p>
+            <p><strong>مالک</strong> <br><a style='color:orange;text-decoration:underline' href="{% url 'login:user_profile' my_shop.shop_owner.fake_id %}">{{my_shop.shop_owner}}</a></p>
+
+            <p><strong>فون</strong> <br> {{my_shop.phone}}</p>
+            <p><strong>تاریخ</strong> <br> {{my_shop.date}}</p>
+            <p><strong>مقام</strong> <br> 
+                <a href="https://www.google.com/maps?q={{my_shop.map_link}}" target="_blank">
+                    <img class="icon-btn" src="{% static 'images/location.jpg' %}">
+                </a>
+            </p>
+            
+            {% if my_shop.booking %}
+                <p style="color:green" class="booking"><strong style="font-size:15px">بکنگ</strong><br>کھلا ہے</p>
+            {% else %}
+                <p style="color:red" class="booking"><strong style="font-size:15px">بکنگ</strong><br>بند ہے</p>
+            {% endif %}
+        </div>
+    </section>
+{% if karigar_requests %}
+<div>
+    <h2>کاریگر کی درخواستیں</h2>
+    {% for req in karigar_requests %}
+    <div style="height:5px;align-content:center" class='data_display flx'>
+        <a href="{% url 'shops:karigar_info' req.karigar.fake_id req.shop.id %}">{{req}}</a>
+    <form  method="POST" action="{% url 'shops:request_accept' req.id %}">
+             {% csrf_token %}
+        <input type="submit" value="منسوخ کریں" name='button'>
+        </form>
+        <form method="POST" action="{% url 'shops:request_accept' req.id %}">
+            {% csrf_token %}
+    <input type="submit" value="قبول کریں" name='button'>
+    </form>
+</div>
+{% endfor %}
+
+</div>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="flx input-group">
+        <input type="text" id="text" name="searched_text" placeholder="نام یا سیریل نمبر" required>
+        <input style="width:30%;color:green" type="submit" value="Search" name='button'>
+    </div>
+</form>
+
+
+    
+    <h3 style="margin-left:7%;color:white">میرے گاہک</h3>
+    <div style="margin:20px" class="links-container">
+        <a href="{% url 'customers:add_customer' my_shop.id %}" class="link-button">نیا گاہک</a>
+    </div>
+    
+<br>
+    <div class="card-list">
+        {% for customer in customers %}
+            {% if customer %}
+            <a href="{% url 'customers:customer_details' customer.id %}">
+                <div class="card_2">
+                    <div class="avatar" style=";background-color:black">{{customer.serial_number}}</div>
+                    <div id={{customer.customer_name.0}} class="info">
+                        <h3> {{customer.customer_name|title}}-{{customer.customer_address}}</h3>
+                        <p>{{customer.customer_phone}}</p>
+                    </div>
+                </div>
+            </a>
+             {% else %}
+             <a href="{% url 'customers:add_customer' my_shop.id forloop.counter %}">
+                 <div style="background-color:rgb(255,111,107)" class="card_2">
+                        <div class="avatar" style="background-color:black; color:white">{{forloop.counter}}</div>
+                        <div id={{customer.customer_name.0}} class="info">
+                           <h3>خالی...</h3>
+                            
+                        </div>
+                    </div>
+             </a>
+        {% endif %}  
+        {% endfor %}
+    </div>
+{% endif %}
+{% endif %}
+
+{% endblock content %}

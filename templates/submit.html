@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+{% block title %}Add details{% endblock title %}
+
+{% block content %}
+<h2>{{text}}</h2>
+<div class="form-container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+        {% if not field.is_hidden %}
+        <div class="input-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+            <small class="help-text">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+            <small class="error">{{ error }}</small>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endfor %}
+        <button type="submit" class="submit-btn">Save</button>
+    </form>
+</div>
+{% endblock content %}
+
+{% block un_auth %}
+<h2>Register</h2>
+<div class="form-container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+        {% if not field.is_hidden %}
+        <div class="input-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+            <small class="help-text">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+            <small class="error">{{ error }}</small>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endfor %}
+        <button type="submit" class="submit-btn">Save</button>
+    </form>
+</div>
+{% endblock un_auth %}

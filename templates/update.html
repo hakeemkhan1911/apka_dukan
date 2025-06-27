@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}Update{% endblock title %}
+
+
+{% block content %}
+<h2>Upload new image</h2>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="image">Update Profile Image:</label><br>
+    <input type="file" name="image" id="image" required><br><br>
+    <input class="neon-btn" type="submit">
+</form>
+{% endblock content %}

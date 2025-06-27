@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% block title %}Booking{% endblock title %}
+
+{% block content %}
+<h2>بوکنگ</h2><br>
+<form method="POST" class="input-group;color:white">
+    {% csrf_token %}
+    <span style="color:white"> کھلا :</span> <input type="checkbox" name="On"><br><br>
+    <span style="color:white">بند :</span>  <input type="checkbox" name="Off"><br>
+    <input style="margin:40px" class="neon-btn" type="submit" value="Save">
+
+</form>
+
+{% endblock content %}

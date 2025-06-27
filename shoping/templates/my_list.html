@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+{% block title %}Your products{% endblock title %}
+
+{% block both %}
+
+<div class="photo-grid">
+    {% for image_obj in products %}
+        <a href="{% url 'shoping:product_details' image_obj.product_info.id %}">
+            <div class="photo-list">
+                <img src= '{{ image_obj.image.url }}' alt="{{ image_obj.product_info.name }}">
+                <div class="image-price">Rs: {{ image_obj.product_info.price }}</div>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+
+
+{% if uncompleted %}
+    <h2>براہ کرم آئٹم کی تفصیلات مکمل کریں</h2>
+    {% for obj in uncompleted %}
+         <a href="{% url 'shoping:upload_image' obj.id %}">
+            <h4>{{obj.name}}</h4>
+        </a>
+    {% endfor %}
+{% endif %}
+
+{% endblock both %}

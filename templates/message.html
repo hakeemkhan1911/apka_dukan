@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+{% block title %}Message{% endblock title %}
+
+{% block content %}
+<head>
+    {% if redirect_to %}
+        <meta http-equiv="refresh" content="2;url={% url redirect_to %}">
+    {% endif %}
+</head>
+<h2>{{msg}}</h2>
+{% endblock content %}
+
+{% block un_auth %}
+<head>
+    {% if redirect_to %}
+        <meta http-equiv="refresh" content="2;url={% url redirect_to %}">
+    {% endif %}
+</head>
+<h2>{{msg}}</h2>
+{% endblock un_auth %}

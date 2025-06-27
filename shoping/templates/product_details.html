@@ -1,0 +1,68 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}Product Details{% endblock title %}
+
+{% block both %}
+
+{% if request.user.id == product.owner.id %}
+<div class="flx">
+    <a href="{% url 'shoping:product_update' product.id %}"><img style="border-radius:50%;width:30px;height:auto" src="{% static 'images/edit.png' %}"></a>
+    <a href="{% url 'shoping:delete_product' product.id %}"><img style="border-radius:50%;width:30px;height:auto" src="{% static 'images/delete.png' %}"></a>
+    <a href="{% url 'shoping:upload_image' product.id %}"><img style="border-radius:50%;width:30px;height:auto" src="{% static 'images/upload_image.png' %}"></a>
+    {% if message %}
+        <div class="photo-item">  
+                    {% if global_msg > 0 %}  
+                        <div class="notification-icon">  
+                          <span class="notification-badge">{{global_msg}}</span>  
+                        </div>  
+                    {% endif %}
+        </div>
+        <a href="{% url 'shoping:recipients_list' product.id %}"><img style="border-radius:50%;width:30px;height:auto" src="{% static 'images/messages.jpg' %}"></a>
+    {% endif %}
+</div>
+{% else %}
+<h2>{{product.owner|title}}<br></h2>
+<div class="flx">
+            <a href="{% if global_status == 'guest' %}{% url 'home:login_first' %}{% else %}{% url 'shoping:messaging' product.id request.user.id %}{% endif %}">
+                {% if global_msg > 0 %}  
+                        <div class="notification-icon">  
+                          <span class="notification-badge"></span>  
+                        </div>  
+                {% endif %}
+                Contect seller
+            </a>
+</div>
+{% endif %}
+
+<section class="additional-info card">
+    <h3>Product Details</h3>
+        <div class='measurement-grid'>
+            <p><strong>Call</strong> <br>{{product_owner_phone}}</p>
+            
+            <p><strong>Name</strong> <br>{{product.name}}</p>
+            <p><strong>Condition</strong> <br> {{product.condition}}</p>
+            <p><strong>Category</strong> <br> {{product.category}}</p>
+            <p><strong>Price</strong> <br> {{product.price}}</p>
+            <p><strong>Date</strong> <br> {{product.date}}</p>
+            <p><strong>Details</strong> <br> {{product.details}}</p>
+        </div>
+        
+</section>
+
+<div class="photo-grid">
+    
+    {% for image in product_images %}
+        {% if request.user.id == product.owner.id %}
+            <a href="{% url 'shoping:full_image' image.image.url True image.id 'product' %}">
+        {% else %}
+            <a href="{% url 'shoping:full_image' image.image.url False image.id  'product' %}">
+        {% endif %}
+            <div class="photo-list">
+                <img src="{{ image.image.url }}" alt="{{ image.name }}">
+            </div>
+            </a>
+        
+    {% endfor %}
+</div>        
+
+{% endblock both %}

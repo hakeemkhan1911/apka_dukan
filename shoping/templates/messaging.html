@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+{% block title %}Messaging{% endblock title %}
+
+{% block content %}
+
+{% if request.user.id == messages.0.message_header.seller.id %}
+    <h2>{{messages.0.message_header.byer|title}}</h2>
+{% else %}
+    <h2>{{messages.0.message_header.seller|title}}</h2>
+{% endif %}
+<div class="message-container">
+    {% for message in messages %}
+        <div class="message {% if message.sender.id == request.user.id %}sent{% else %}received{% endif %}">
+            <p style="color:black">{{ message.message }}</p>
+            <span class="timestamp">{{ message.date|timesince }} ago</span>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="message-form">
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="message" placeholder="Type your message..." required>
+        <input type="submit" value="Send">
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,63 @@
+{% extends 'main.html' %}
+{% block title %}Customer Update{% endblock title %}
+{% block content %}
+<h2>{{text}}</h2>
+<div class="form-container">
+<form method="POST">
+    {% csrf_token %}
+    <h2>Customer</h2>
+    {% for field in form %}
+        {% if not field.is_hidden %}
+            <div class="input-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                <small class="help-text">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                <small class="error">{{ error }}</small>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="form-container">
+    <h2>Measurements</h2>
+    {% for field in measurement_form %}
+        {% if not field.is_hidden %}
+            <div class="input-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                <small class="help-text">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                <small class="error">{{ error }}</small>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="form-container">
+    <h2>Order</h2>
+    {% for field in order_form %}
+        {% if not field.is_hidden %}
+            <div class="input-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                <small class="help-text">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                <small class="error">{{ error }}</small>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endfor %}
+    
+    <input type="submit" class="submit-btn" value="Save">
+    
+</form>
+</div>
+
+{% endblock content %}

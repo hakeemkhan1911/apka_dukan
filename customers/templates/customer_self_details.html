@@ -1,0 +1,71 @@
+{% extends 'main.html' %}
+{% block title %}Customer Own Details{% endblock title %}
+{% if success %}
+    {% block both %}
+    <div class="order-container">
+        <!-- Customer Details -->
+        <section class="client-details card">
+            <h3>Customer</h3>
+            <div class="measurement-grid">
+                <p><strong>تاریخ:</strong> <br>{{ customer_details.date_time }}</p>
+                <p><strong> ارڈر نمبر:</strong> <br> {{ customer_details.serial_number }}</p>
+                <p><strong>فون:</strong> <br> {{ customer_details.customer_phone }}</p>
+                <p><strong>ایڈرس:</strong> <br> {{ customer_details.customer_address }}</p>
+                <p><strong>اپرانا حساب:</strong> <br> {{ order.previous }}</p>
+                <p><strong>ٹوٹل:</strong> <br>{{ order.total_price }}</p>
+                <p><strong>اڈوانس:</strong> <br>{{ order.advance }}</p>
+                <p><strong>بقایا:</strong> <br>{{ order.remining }}</p>
+                <p><strong>واپسی تاریخ:</strong><br> {{ order.delivery_date }}</p>
+            </div>
+        </section>
+    
+        <!-- Measurement Details -->
+        <section class="measurement-details card">
+            <h3>Measurements</h3>
+            <div class="measurement-grid">
+                <p><strong>لمبایی:</strong> <br> {{ measurement_added.lambayi }}</p>
+                <p><strong>چھوایی:</strong> <br> {{ measurement_added.choriyi }}</p>
+                <p><strong>چھاتی:</strong> <br> {{ measurement_added.chest }}</p>
+                <p><strong>بازو:</strong> <br> {{ measurement_added.bazoo }}</p>
+                <p><strong>استین:</strong> <br> {{ measurement_added.asteen }} - {{ measurement_added.asteen_choriti }}</p>
+                <p><strong>مونڈا:</strong> <br> {{ measurement_added.monda }}</p>
+                <p><strong>تیرا:</strong> <br> {{ measurement_added.teera }}</p>
+                <p><strong>شلوار:</strong> <br> {{ measurement_added.shalwar }}</p>
+                <p><strong>پانچہ:</strong> <br> {{ measurement_added.pancha }}</p>
+            </div>
+        </section>
+    
+        <!-- Additional Information -->
+        <section class="additional-info card">
+            <h3>Additional Information</h3>
+            <div class='measurement-grid'>
+                <p><strong>گلہ:</strong> <br> {{ measurement_added.gala }} - {{ measurement_added.gala_type }}</p>
+                <p><strong>سیلای:</strong> <br> {{ measurement_added.seelai }}</p>
+                <p><strong>گیرا:</strong> <br> {{ measurement_added.gehra }}</p>
+                <p><strong>پاکٹ:</strong> <br> {{ measurement_added.pockets }}</p>
+            </div>
+        </section>
+    
+        <!-- Extra Details -->
+        <section class="additional-info card">
+            <h3>Extra</h3>
+            <div class="measurement-grid">
+                <p><strong>باقی معلومات:</strong> <br> {{ measurement_added.extra }}</p>
+            </div>
+        </section>
+    </div>
+<form class="input-group flx">
+        <h2>Please rate our shop.</h2>
+        <input type="text" value={{customer_details.id}} name='customer_id' hidden>
+        <input type="submit" value="Yes" class="submit-btn" name='button'>
+        
+        <input type="submit" value="No" class="submit-btn" name='button'>
+    
+    </form>
+    
+{% endblock both %}
+{% else %}
+<h2>
+    Sorry, you are not an authorized user.
+</h2>
+{% endif %}

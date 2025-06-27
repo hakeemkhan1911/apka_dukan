@@ -1,0 +1,138 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}Karigar details{% endblock title %}
+{% block content %}
+
+
+<h2>{{me.full_name|title}}</h2>
+<div style="text-align: center;">
+    {% if me.fake_id == request.user.id and global_status == 'karigar' %}
+        <a href="{% url 'shoping:full_image' me.image.url 'True' me.id 'user' %}">
+    {% else %}
+        <a href="{% url 'shoping:full_image' me.image.url False %}">
+        
+    {% endif %}
+        <img class='profile_photo' style="width:150px;height:150px;border-radius:50%;object-fit:cover" src={{me.image.url}} alt="no image">
+    </a>
+</div>
+{% if me.fake_id == request.user.id and global_status == 'karigar' %}
+    <div class='flx'>
+        <a href="{% url 'login:update_user' %}"><img class="icon-btn" src='{% static "images/edit.png" %}' alt='No image'></a>
+        <a href="{% url 'login:delete_user' %}"><img class="icon-btn" src='{% static "images/delete.png" %}' alt='No image'></a>
+    <div class="photo-item">  
+                {% if global_msg > 0 %}  
+                    <div class="notification-icon">  
+                      <span class="notification-badge">{{global_msg}}</span>  
+                    </div>  
+                {% endif %}  
+            <a href="{% url 'login:me' %}"><img class="icon-btn" src='{{me.image.url}}' alt='No image'></a>
+    </div>
+    </div>
+{% endif %}
+
+<section class="additional-info card">
+        <h3>{{me.full_name|title}}</h3>
+        <div class='measurement-grid'>
+            <p><strong>Address</strong> <br>{{me.address}} </p>
+            <p><strong>Phone</strong> <br> {{me.phone}}</p>
+            <p><strong>Date</strong> <br> {{me.karigar_date}}</p>
+            <p><strong>Experience</strong> <br> {{me.experience}}</p>
+            <p><strong>Status</strong> <br> {{me.status}}</p>
+            <p><strong>Shop</strong> <br> {{me.karigar_shop}}</p>
+        </div>
+</section>
+{% if global_status == 'karigar' %}
+    {% if shop_reqs %}
+    <h2>Request recived</h2>
+        {% for obj in shop_reqs %}
+        <h2>
+            <a href="{% url 'shops:shop_details' obj.shop.id %}">{{obj.shop}}</a>
+        </h2>
+        {% endfor %}
+    {% endif %}
+{% endif %}
+
+<div class='flx'>
+    {% if me.karigar_shop.id and global_status == 'shop_keeper' %}
+        <a href="{% url 'shops:leave_shop' me.karigar_shop.id me.fake_id %}">Kick out</a>
+    {% else %}
+    {% if req.requester == 'karigar' and global_status == 'shop_keeper' %}
+    <h3>The karigar sent you a request.</h3>
+        <form  method="POST" action="{% url 'shops:request_accept' req.id %}">
+             {% csrf_token %}
+        <input class="neon-btn" type="submit" value="منسوخ" name='button'>
+        </form>
+        <form method="POST" action="{% url 'shops:request_accept' req.id %}">
+                 {% csrf_token %}
+            <input class="neon-btn" type="submit" value="قبول کریں" name='button'>
+        </form>
+    {% elif shop_reqs.0.requester == 'shop' and global_status == 'shop_keeper' %}
+        <h3>Request has been sent. Press the below button to cancel request.</h3>
+             <form  method="POST" action="{% url 'shops:request_accept' req.id %}">
+                 {% csrf_token %}
+                <input class='neon-btn' type="submit" value="منسوخ" name='button'>
+            </form>
+        
+        {% elif not shop_reqs and  global_status == 'shop_keeper' %}
+            <h3>Press the below button to send request.</h3>
+                <a class="neon-btn" style="color:black" href='{% url "shops:request_karigar" me.fake_id %}'>Request!</a>
+        {% endif %}
+            
+    {% endif %}
+</div>
+{% if me.fake_id == request.user.id %}
+    {% if me.karigar_shop %}
+    <h2>Shop details</h2>
+         
+    <section class="additional-info card">
+            <a href="{% url 'shops:leave_shop' me.karigar_shop.id %}"><span style="color:red;font-weight:bold">Leave Shop</span></a>
+        <h3>{{me.karigar_shop.shop_name|title}}</h3>
+        <div class='measurement-grid'>
+            <p><strong>Address</strong> <br>{{me.karigar_shop.shop_address}} </p>
+            <p><strong>Phone</strong> <br> {{me.karigar_shop.phone}}</p>
+            <p><strong>Date</strong> <br> {{me.karigar_shop.date}}</p>
+            {% if me.karigar_shop.booking %}
+                <p style="color:green" class="booking"><strong style="font-size:15px">Booking </strong><br>Open</p>
+            {% else %}
+                <p style="color:red" class="booking"><strong style="font-size:15px">Booking </strong><br>Closed</p>
+
+            {% endif %}
+            <p><strong>Price</strong> <br> {{me.karigar_shop.price}}</p>
+            <p><strong>Date</strong> <br> {{me.karigar_shop.date}}</p>
+        </div>
+    </section>
+<h2>Customer List</h2>
+<form method="POST">
+    {% csrf_token %}
+    <div class="flx input-group">
+        <input type="text" id="text" name="searched_text" placeholder="Name or Serial number" required>
+        <input style="width:30%;color:green" type="submit" value="Search" name='button'>
+    </div>
+</form>
+    <div class="card-list">
+        {% for customer in customers %}
+            {% if customer %}
+            <a href="{% url 'customers:customer_details' customer.id %}">
+                <div class="card_2">
+                    <div class="avatar" style="color:blue;background-color: rgb(223,218,104);">
+                        {{customer.serial_number}}
+                    </div>
+                    <div class="info">
+                        <h3> {{customer|title}}-{{customer.customer_address}}</h3>
+                        <p><p>{{customer.customer_phone}}</p></p>
+                    </div>
+                </div>
+            </a>
+            {% else %}
+                <div style="background-color:rgb(255,111,107)" class="card_2">
+                    <div class="avatar" style="background-color:black; color:white">{{forloop.counter}}</div>
+                    <div class="info">
+                        <h3>Empty...</h3>
+                    </div>
+                </div>
+            {% endif %}  
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endif %}
+{% endblock content %}

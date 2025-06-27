@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}Customer Sharing{% endblock title %}
+{% block content %}
+
+<div class="order-container">
+    <p style="text-align: right; font-weight: bold;">
+    اس صفحے میں کسٹمر کی رسید موجود ہے۔ براہ کرم نیچے دی گئی معلومات کا اسکرین شاٹ لیں اور واٹس ایپ کے ذریعے کسٹمر کو بھیج دیں۔
+</p>
+    <!-- Customer Details -->
+    <section class="client-details card">
+        <h2>{{ customer.shop }}
+            </h2>
+        <h3>{{ customer.customer_name }} - {{ customer.customer_address }}</h3>
+        <div class="measurement-grid">
+            <p><strong>تاریخ:</strong> <br>{{ customer.date_time }}</p>
+            <p><strong> ارڈر نمبر:</strong> <br> {{ customer.serial_number }}</p>
+            <p><strong>فون:</strong> <br> {{ customer.customer_phone }}</p>
+            <p><strong>ایڈرس:</strong> <br> {{ customer.customer_address }}</p>
+            <p><strong>اپرانا حساب:</strong> <br> {{ order.previous }}</p>
+            <p><strong>ٹوٹل:</strong> <br>{{ order.total_price }}</p>
+            <p><strong>اڈوانس:</strong> <br>{{ order.advance }}</p>
+            <p><strong>بقایا:</strong> <br>{{ order.remining }}</p>
+            <p><strong>واپسی تاریخ:</strong><br> {{ order.delivery_date }}</p>
+        </div>
+    </section>
+    <a href= {{wa_link}} class="submit-btn" target="_blank">Share on whatsapp</a>
+</div>
+
+
+{% endblock content %}

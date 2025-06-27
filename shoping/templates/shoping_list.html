@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% block title %}Sell and Buy{% endblock title %}
+
+{% block both %}
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="input-group">
+        <input type="text" id="text" name="searched_text" placeholder="نام، لوکیشن، قسم" required>
+    </div>
+</form>
+
+<div class="flx">
+
+{% if global_status == 'guest' %}
+    <a href="{% url 'home:login_first' %}">سیل</a>
+    <a href="{% url 'home:login_first' %}">اپکے پروڈکٹس</a>
+{% else %}
+    <a href="{% url 'shoping:sell_product' %}">سیل</a>
+    <a href="{% url 'shoping:my_list' %}">اپکے پروڈکٹس</a>
+
+{% endif %}
+</div>
+
+<div class="photo-grid">
+    {% for image_obj in images %}
+        <a href="{% url 'shoping:product_details' image_obj.product_info.id %}">
+            <div class="photo-list">
+                <img src= '{{ image_obj.image.url }}' alt="{{ image_obj.product_info.name }}">
+                <div class="image-price">Rs: {{ image_obj.product_info.price }}</div>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+{% endblock both %}
+    

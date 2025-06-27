@@ -1,0 +1,79 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}Shop Details{% endblock title %}
+
+{% block both %}
+<div style="text-align: center;">
+  <a href="{% url 'shoping:full_image' shop.image.url 'False' shop.id 'shop' %}">
+     <img class="profile_photo" src= {{shop.image.url}}>
+  </a>
+</div>
+
+<section class="additional-info card">
+    <h3>مزید معلومات</h3>
+        <div class='measurement-grid'>
+            <p><strong>نام</strong> <br> {{shop.shop_name}}</p>
+            <p><strong>قیمت</strong> <br> {{shop.price}}</p>
+            <p><strong>فون</strong> <br> {{shop.phone}}</p>
+            <p><strong>پتہ</strong> <br> {{shop.shop_address}}</p>
+            <p><strong>مالک</strong> <br><a style='color:orange;text-decoration:underline' href="{% url 'login:user_profile' shop.shop_owner.fake_id %}">{{shop.shop_owner}}</a></p>
+            <p><strong>تاریخ</strong> <br> {{shop.date}}</p>
+            <p><strong>دکان کا محل وقوع</strong> <br> 
+                        <a href="https://www.google.com/maps?q={{shop.map_link}}" target="_blank"><img class="icon-btn" src="{% static 'images/location.jpg' %}"></a>
+            </p>
+            
+            {% if shop.booking == True %}
+                    <p style="color:green" class="booking"><strong style="font-size:15px">بکنگ</strong><br>کھلی</p>
+            {% else %}
+                    <p style="color:red" class="booking"><strong style="font-size:15px">بکنگ</strong><br>بند</p>
+
+            {% endif %}
+        </div>
+        
+        
+        
+        {% if status != None %}
+            {% if not karigar.karigar_shop %}
+            <div class='data_display'>
+                {% if req_obj.requester == 'shop' %}
+                <h3>دکان نے آپ کو ان کے ساتھ کام کرنے کی درخواست کی ہے۔</h3>
+                     <form method="POST" action="{% url 'shops:delete_request' shop.id %}">
+                         {% csrf_token %}
+                         <input type="submit" value="قبول" name='button'>
+                     </form>
+                    
+        
+                     <form method="POST" action="{% url 'shops:delete_request' shop.id %}">
+                         {% csrf_token %}
+                         <input type="submit" value="منسوخ" name='button'>
+                     </form>
+                {% else %}
+                        {% if status == 'sent' %}
+                            <h4>درخواست بھیج دی گئی ہے۔ حذف کرنے کے لیے نیچے دیے گئے بٹن کو دبائیں۔</h4>
+                                
+                                 <form method="POST" action="{% url 'shops:delete_request' shop.id %}">
+                                     {% csrf_token %}
+                                     <input type="submit" value="منسوخ" name='button'>
+                                     
+                                 </form>
+                        {% elif status == 'not_sent' %}
+                            <h4>درخواست بھیجنے کے لیے نیچے دیے گئے بٹن کو دبائیں۔</h4>
+                                       
+                                 <form method="POST" action="{% url 'shops:request_recived' shop.id %}">
+                                     {% csrf_token %}
+                                     <input type="submit" value="درخواست بھیجیں" name='button'>
+                                 </form>
+                        {% endif %}
+            {% endif %}
+        </div>
+                
+            {% endif %}
+        {% endif %}
+    </section>
+{% if not request.user.is_authenticated %}
+            <a href="{% url 'customers:login_customer' shop.id %}">
+                آرڈر چیک کریں
+            </a>
+{% endif %}
+  
+{% endblock both %}

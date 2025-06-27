@@ -1,0 +1,311 @@
+.icon-btn{
+    border-radius: 50%;
+    width:5vh;
+    height:5vh;
+    object-fit: cover;
+}
+.booking{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.profile_photo{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    object-fit:cover;
+}
+.navbar-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    height: 5%;
+    }
+
+/* Individual links */
+.navbar-links a:hover {
+    color: #d9e7ff; /* Light blue color on hover */
+}
+
+.navbar-links a {
+    color: #2cd802/* Light blue color on hover */
+}
+
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Stack links vertically */
+        padding: 20px;
+    }
+    .navbar-links a {
+        margin: 10px 0; /* Vertical spacing for stacked links */
+    }
+}
+
+
+.navbar {
+    background: linear-gradient(170deg, #d810d4c3 0%, #e6122874 45%, #106ed8a2 100%);
+    padding: 7px;
+    height: 8vh;
+    align-items: center;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* Two columns */
+    gap: 10px;  /* Gap between photos */
+}
+
+.photo-list {
+    position: relative;  /* Required for absolute positioning of the title */
+}
+
+.photo-list img {
+    width: 100%;  /* Ensure the image fills the container */
+    height: 200px;  /* Fixed height for all images */
+    object-fit: cover;  /* Ensure the image covers the area without distortion */
+    border-radius: 8%;  /* Optional: Add rounded corners */
+}
+
+.image-price {
+    position: absolute;  /* Position the title over the image */
+    bottom: 0;  /* Place the title at the bottom of the image */
+    left: 0;  /* Align the title to the left */
+    width: 100%;  /* Make the title span the full width of the image */
+    background-color: rgba(0, 0, 0, 0.7);  /* Semi-transparent black background */
+    color: white;  /* White text color */
+    padding: 8px;  /* Add some padding */
+    font-size: 16px;  /* Adjust font size */
+    border-radius: 0 0 5% 7%;  /* Rounded corners at the bottom */
+}
+
+.notification-icon {
+    position: relative;
+    display: inline-block;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -30px;
+    right: -20px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 18px;
+}
+
+/* General container styling */
+.messages-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    font-family: "Arial", sans-serif;
+}
+
+.messages-heading {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Messages list styling */
+.messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Adds spacing between each message */
+}
+
+/* Individual message card */
+.message-card {
+    display: flex;
+    background: #6f4e7fe1;
+    align-items: center;
+    padding: 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.message-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15);
+    
+}
+
+/* User avatar (First letter of name) */
+.message-avatar {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 15px;
+    text-transform: uppercase;
+}
+
+/* Message details */
+.message-details {
+    flex: 1;
+}
+
+.message-details h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.message-details{
+    margin: 3px 0 0;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Background colors for each recipient */
+.bg-blue {
+    background-color: #007bff;
+}
+
+.bg-green {
+    background-color: #28a745;
+}
+
+.bg-orange {
+    background-color: #ff7f50;
+}
+
+.about_us {
+    font-family: 'Noto Nastaliq Urdu', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    direction: rtl;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+ul {
+    text-align: right;
+    list-style-type: none;
+    padding: 0;
+}
+ul li {
+    margin: 5px 0;
+    }
+    
+.karigar-row {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.karigar-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.karigar-info {
+    margin-left: 15px;
+    text-decoration: none;
+    color: white;
+}
+
+.copy-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.copy-btn {
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+.copy-btn:hover {
+  background-color: #45a049;
+}
+
+.payment_form p {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.payment_form p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 500;
+    direction: rtl; /* For proper Urdu alignment */
+    text-align: right;
+}
+
+.payment-image {
+    display: block;
+    max-width: 30%;
+    height: 30%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+
+/* Vertical A-Z bar on right */
+    .alphabet-bar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1px;
+      padding: 10px 5px;
+      background-color: transparent; /* transparent background */
+      z-index: 10;
+    }
+
+    .alphabet {
+      width: 14px;
+      height: 14px;
+      font-size: 10px;
+      border: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+      background-color: rgba(150,150,150,0.568); /* letters visible over any background */
+      color: black;
+    }

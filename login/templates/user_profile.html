@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block content %}
+<div style="text-align: center;">
+  <a href="{% url 'shoping:full_image' user_profile.image.url False user_profile.fake_id 'user' %}">
+    <img class="profile_photo" src="{{ user_profile.image.url }}" alt="no image">
+  </a>
+</div>
+<section class="additional-info card">  
+        <h3>معلومات</h3>
+        <div class='measurement-grid'>  
+            <p><strong>نام</strong> <br>{{user_profile.full_name}}</p>  
+            <p><strong>ایڈرس</strong> <br>{{user_profile.address}} </p>  
+            <p><strong>فون </strong> <br> {{user_profile.phone}}</p>  
+            <p><strong>تاریخ </strong> <br> {{user_profile.date}}</p>  
+            <p><strong>ای میل </strong> <br> {{user_profile.email}}</p>  
+            
+        </div>  
+</section>
+{% endblock content %}

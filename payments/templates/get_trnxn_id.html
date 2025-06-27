@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}
+Transaction ID
+{% endblock title %}
+{% block content %}
+
+<h2>ادائیگی کی تفصیلات جمع کریں</h2>
+<p>رسید پر ملنے والی ٹرانزیکشن آئی ڈی باکس میں درج کریں</p>
+<form method="post" class="form-container">
+  {% csrf_token %}
+
+  <div class="input-group">
+    <label for="transaction_id">ٹرانزیکشن آئی ڈی</label>
+    <input id="transaction_id" name="transaction_id" type="text" pattern="[0-9]{10,13}" title="براہ کرم درست ٹرانزیکشن آئی ڈی درج کریں" placeholder="ادائیگی کی رسید سے آئی ڈی درج کریں" required>
+  </div>
+
+  <button class="submit-btn"type="submit">جمع کریں</button>
+</form>
+{% if payment_method == 'easypaisa' %}
+    <a href="{% url 'shoping:full_image' '/static/images/easypaisa_trnx.jpg' False %}">
+            <img class="payment-image" src='{% static "images/easypaisa_trnx.jpg" %}'>
+        </a>
+{% elif payment_method == 'jazzcash' %}
+    <a href="{% url 'shoping:full_image' '/static/images/jazzcash_trnx.jpg' False %}">
+         <img class="payment-image" src='{% static "images/jazzcash_trnx.jpg" %}'>
+    </a>
+{% endif %}     
+
+{% endblock content %}

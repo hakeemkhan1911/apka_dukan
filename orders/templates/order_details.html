@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+{% block title %}Order Details{% endblock title %}
+
+{% block content %}
+<hr>
+<div>
+    <a href="{% url 'orders:update_order' order.id %}">Update</a><br>
+    <a href="{% url 'orders:delete_order' order.id %}">Delete</a><br>
+    <a href="{% url 'orders:add_order' order.customer.id %}">New</a>
+</div>
+<hr>
+customer : {{order.customer}}<br>
+Status : {{order.payment_status}}<br>
+delivery : {{order.delivery_date}}<br>
+total : {{order.total_price}}<br>
+advance : {{order.advance}}<br>
+reminings : {{order.remining}}<br>
+date : {{order.date}}
+
+
+
+
+{% endblock content %}

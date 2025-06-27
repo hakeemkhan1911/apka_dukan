@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+{% block title %}Your karigar{% endblock title %}
+
+{% block content %}
+{% if my_karigar.count > 0 %}
+<h2>Apkay karigar</h2>
+<div class="k-container">
+    {% for karigar in my_karigar %}
+    <div class="karigar-row">
+        <a href="{% url 'shoping:full_image' karigar.image.url False %}">
+            <img src="{{ karigar.image.url }}" alt="{{ karigar }}" class="karigar-photo">
+        </a>
+        <a href="{% url 'shops:karigar_info' karigar.fake_id %}" class="karigar-info">
+            Naam : {{ karigar }}<br>
+            Address : {{karigar.address}}
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+    <h2>No karigars added yet.</h2>
+{% endif %}
+<a href = '{% url "karigars:all_karigars" %}'>Naya karigar</a>
+{% endblock content %}

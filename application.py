@@ -1,0 +1,1 @@
+from tailoring.wsgi import application

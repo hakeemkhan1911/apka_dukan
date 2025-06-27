@@ -1,0 +1,77 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class='flx'>  
+    <a href="{% url 'login:update_user' %}"><img class='icon-btn' src='{% static "images/edit.png" %}'></a>  
+    <a href="{% url 'login:delete_user' %}"><img class='icon-btn' src="{% static 'images/delete.png' %}"></a>  
+    
+    {% if shop_id %}  
+        <a href="{% url 'shops:add_shop' %}"><img class="icon-btn" src="{% static 'images/my_shop.png' %}"></a>  
+    {% else %}
+        {% if global_status == 'shop_keeper' %}
+            <a href="{% url 'shops:add_shop' %}">نیا دکان</a> 
+        {% endif %}
+    {% endif %}
+</div>  
+<div style="text-align: center;">
+  <a href="{% url 'shoping:full_image' me.image.url True me.fake_id 'user' %}">
+    <img class="profile_photo" src="{{ me.image.url }}" alt="no image">
+  </a>
+</div>
+{% if total_new_msgs == 1 %}
+<h1>1 نیا مسیج</h1>
+{% elif total_new_msgs > 1 %}
+
+   <h1>{{total_new_msgs}} میسجز</h1>  
+{% endif %}
+<section class="additional-info card">  
+        <h3>My Information</h3>
+        <div class='measurement-grid'>  
+            <p><strong>نام</strong> <br>{{me.full_name}}</p>  
+            <p><strong>ایڈرس</strong> <br>{{me.address}} </p>  
+            <p><strong>فون </strong> <br> {{me.phone}}</p>  
+            <p><strong>تاریخ </strong> <br> {{me.date}}</p>  
+            <p><strong>ای میل </strong> <br> {{me.email}}</p>  
+            
+        </div>  
+</section>
+{% if my_products %}
+<h2>اپکے پروڈکٹس</h2>  <div class="photo-grid">  
+    {% for number_of_msgs,image_obj in my_products %}  
+        <a href="{% url 'shoping:product_details' image_obj.product_info.id %}">  
+            <div class="photo-list">  
+                {% if number_of_msgs > 0 %}  
+                    <div class="notification-icon">  
+                      <span class="notification-badge">{{number_of_msgs}}</span>  
+                    </div>  
+                {% endif %}  
+                <img src="{{ image_obj.image.url }}" alt="{{ image_obj.product_info.name }}">  
+                <div class="image-price">Rs: {{ image_obj.product_info.price }}</div>  
+            </div>  
+        </a>  
+    {% endfor %}  
+</div>
+<hr>
+{% endif %}
+
+{% if i_want_to_buy %}
+<h2>اپکے ارڈرز</h2>  <div class="photo-grid">  
+    {% for number_of_msgs,image_obj in i_want_to_buy %}  
+        <a href="{% url 'shoping:product_details' image_obj.product_info.id %}">  
+            <div class="photo-list">  
+                {% if number_of_msgs > 0 %}  
+                    <div class="notification-icon">  
+                      <span class="notification-badge">{{number_of_msgs}}</span>  
+                    </div>  
+                {% endif %}  
+                <img src="{{ image_obj.image.url }}" alt="{{ image_obj.product_info.name }}">  
+                <div class="image-price">Rs: {{ image_obj.product_info.price }}</div>  
+            </div>  
+        </a>  
+    {% endfor %}  
+</div>
+{% endif %}
+{% endblock content %}
+

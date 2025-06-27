@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+{% block title %}Image View{% endblock title %}
+{% block both %}
+{% if has_permission == 'True' and request.user.is_authenticated %}
+    {% if user_type == 'shop' %}
+        <form class="flx" method="POST" action="{% url 'shops:update_shop_photo' user_id %}">
+            {% csrf_token %}
+            <input type="submit" value="Update" name='button'>
+            <input type="submit" value="Delete" name='button'>
+        </form>
+    {% elif user_type == 'user' %}
+        <form class="flx" method="POST" action="{% url 'login:profile_photo_update' %}">
+            {% csrf_token %}
+            <input type="submit" value="Update" name='button'>
+            <input type="submit" value="Delete" name='button'>
+        </form>
+    {% elif user_type == 'product' %}
+        <form class="flx" method="POST" action="{% url 'shoping:delete_product_image' user_id %}">
+            {% csrf_token %}
+            <input type="submit" value="Delete" name='button'>
+        </form>
+    {% endif %}
+    <img style="width:100%;height:auto" src={{image_url}}>
+{% else %}
+<img style="width:100%;height:auto" src={{image_url}}>
+{% endif %}
+{% endblock both %}

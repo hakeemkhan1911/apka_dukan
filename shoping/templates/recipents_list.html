@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+{% block title %}Messages{% endblock title %}
+
+{% block content %}
+<div class="messages-container">
+    <h2 class="messages-heading">آپ کے پیغامات</h2>
+    <div class="messages-list">
+        
+        {% for no_of_msgs, recipient in recipients_list %}
+            {% if recipient.message_header.product.id and recipient.message_header.byer.id %}
+                <a href="{% url 'shoping:messaging' recipient.message_header.product.id recipient.message_header.byer.id %}" class="message-card">
+            
+                <div class="message-avatar">
+                    {% if no_of_msgs > 0 %}
+                        <div class="notification-icon">
+                          <span class="notification-badge">{{no_of_msgs}}</span>
+                        </div>
+                    {% else %}
+                     <h2>0</h2>
+                    {% endif %}
+                    
+                </div>
+                
+                <div class="message-details" style="background:none">
+                    <h3 style="color:orange">{{ recipient.message_header.byer }}</h3>
+                    <h5>{{recipient.message|truncatewords:5}}</h5>
+                </div>
+        </a>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

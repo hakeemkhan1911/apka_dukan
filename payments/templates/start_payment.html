@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}
+Payment Through
+{% endblock title %}
+{% block content %}
+
+
+<!-- templates/payments/pay.html -->
+<h1>آپ کس طریقے سے پیسے بھیجنا چاہتے ہیں؟ ایزی پیسہ یا جاز کیش؟
+</h1>
+<form method="post" class="form-container">
+  {% csrf_token %}
+  <button type="submit" name="button" value="easypaisa">
+    <img src="{% static 'images/easypaisa.jpg' %}" alt="EasyPaisa" class="submit-btn" style="background:none">
+  </button>
+  
+  <button type="submit" name="button" value="jazzcash">
+    <img class="submit-btn" src="{% static 'images/jazzcash.jpg' %}" alt="JazzCash" style="background:none">
+  </button>
+</form>
+{% endblock content %}

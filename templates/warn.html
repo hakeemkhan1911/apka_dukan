@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% block title %}Warning{% endblock title %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <h2 style="color:red">{{msg}}</h2>
+    <div class="flx">
+        
+        <input class="neon-btn" type="submit" value="ہاں" name='button'>
+        <input class="neon-btn" type="submit" value="نہیں" name='button'>
+    </div>
+</form>
+{% endblock content %}

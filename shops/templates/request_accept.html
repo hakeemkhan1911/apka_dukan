@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+{% block title %}Request{% endblock title %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" name='button' value="Accept">
+    <input type="submit" value="Cancel" name="button">
+</form>
+{% endblock content %}

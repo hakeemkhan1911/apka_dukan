@@ -1,0 +1,77 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %}
+رقم شامل کریں
+{% endblock title %}
+{% block content %}
+
+<div method="post" class="form-container">
+  {% csrf_token %}
+  <div class="input-group">
+    <label for="number">نمبر</label>
+    <input id="number-input" type="text" value="{{ number }}" readonly>
+  </div>
+  <div class="copy-container">
+  <button class="copy-btn" data-target="number-input">کاپی کریں</button>
+</div>
+
+</div>
+
+
+{% if payment_method == 'easypaisa' %}
+        <h1 style="text-align: center;">
+        براہ کرم اوپر دیا ہوا نمبر کاپی کریں اور اس ایزی پیسہ اکاؤنٹ میں رقم بھیجیں
+
+        </h1>
+
+    <form class="payment_form" action="{% url 'payments:get_trnxn_id' 'easypaisa' %}">
+        <p>۔  پیسہ ایپ کھولیں اور بٹن پر کلک کریں</p>
+        <a href="{% url 'shoping:full_image' '/static/images/easypaisa1.jpg' False %}">
+            <img class="payment-image" src='{% static "images/easypaisa1.jpg" %}' alt="image missing">
+        </a>
+        
+        <p>۔  والے آپشن پر کلک کریں</p>
+        <a href="{% url 'shoping:full_image' '/static/images/easypaisa2.jpg' False %}">
+            <img class="payment-image" src='{% static "images/easypaisa2.jpg" %}' alt="image missing">
+        </a>
+        
+        <p>کاپی کیا ہوا موبائل نمبر درج کریں</p>
+        <a href="{% url 'shoping:full_image' '/static/images/easypaisa3.jpg' False %}">
+            <img class="payment-image" src='{% static "images/easypaisa3.jpg" %}' alt="image missing">
+        </a>
+        <p>نیکسٹ بٹن پر کلک کرے</p>
+        <a href="{% url 'shoping:full_image' '/static/images/easypaisa4.jpg' False %}">
+            <img class="payment-image" src='{% static "images/easypaisa4.jpg" %}' alt="image missing">
+        </a>
+        <input class="submit-btn" type="submit" name="button" value="مکمل">
+    </form>
+{% elif payment_method == 'jazzcash' %}
+    <h1 style="text-align: center;">
+        براہ کرم اوپر دیا ہوا نمبر کاپی کریں اور اس جازکیش اکاؤنٹ میں رقم بھیجیں
+        </h1>
+    <form class="payment_form" action="{% url 'payments:get_trnxn_id' 'jazzcash' %}">
+        <p>  ایپ کھولیں اور اس بٹن پر کلک کریں</p>
+        <a href="{% url 'shoping:full_image' '/static/images/jazzcash1.jpg' False %}">
+            <img class="payment-image" src='{% static "images/jazzcash1.jpg" %}' alt="image missing">
+        </a>
+        
+        <p>۔  والے آپشن پر کلک کریں</p>
+        <a href="{% url 'shoping:full_image' '/static/images/jazzcash2.jpg' False %}">
+            <img class="payment-image" src='{% static "images/jazzcash2.jpg" %}'>
+        </a>
+        
+        <p>کاپی کیا ہوا موبائل نمبر درج کریں</p>
+        <a href="{% url 'shoping:full_image' '/static/images/jazzcash3.jpg' False %}">
+            <img class="payment-image" src='{% static "images/jazzcash3.jpg" %}' alt="image missing">
+        </a>
+        
+        <p>press the below button</p>
+        <a href="{% url 'shoping:full_image' '/static/images/jazzcash4.jpg' False %}">
+            <img class="payment-image" src='{% static "images/jazzcash4.jpg" %}' alt="image missing">
+        </a>
+        
+        <input class="submit-btn" type="submit" name="button" value="مکمل">
+    </form>
+{% endif %}
+<hr>
+{% endblock content %}

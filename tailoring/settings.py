@@ -64,8 +64,12 @@ WSGI_APPLICATION = 'tailoring.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / "db.sqlite3",
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD':config('DB_PASSWORD') ,
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -99,11 +103,11 @@ FILE_UPLOAD_HANDLERS = [
 ]
 
 MEDIA_URL='/media/'
-MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+MEDIA_ROOT=os.path.join(BASE_DIR,'media_root')
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR/"static"]
-STATIC_ROOT = BASE_DIR/'staticfiles'/'photos'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # For collectstatic
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Only if you have a 'static' folder in project
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
